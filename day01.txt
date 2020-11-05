@@ -32,7 +32,293 @@ java version "1.8.0_144"
 Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
 Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
 
-二、
+二、Eclipse
+    --- java开发的工具 
+    	--- Eclipse：免费的
+    	--- MyEclipse: 收费的
+    	--- IDEA：免费的/收费的
+    ---使用
+	--- 目录结构
+  		-- workspace：指定代码存储位置的；
+		-- project--右键--new java project -- 输入项目名称 -- finish
+		-- package-- 选中src---右键 -- new package -- 输入包名---finish
+		-- class-----选中包名---右键--new class -- 输入类名 -- finish
+
+--- 练习：
+熟悉DOS命令
+使用DOS命令，编译HelloWorld
+
+C:\Users\Administrator\Desktop>javac HelloWorld.java
+
+C:\Users\Administrator\Desktop>java HelloWorld
+Java BIG
+
+三、HelloWorld
+
+package cn.tedu.demo;//一个包里面的类名是不能重复的；
+//注释：单行注释
+/* 多行注释：
+ * 
+ *  */
+/**
+ * 文本注释：
+ * 定义一个包：
+ * package cn.tedu.demo;
+ * package：包，java中的关键字
+ * cn.tedu.demo  包名称，域名反写  全部小写 cn.tedu  com.baidu
+ *   				cn.jd
+ * ;  中文中类似于句号，java中的结束标识。
+ * for(int x= 0;x>7;x++);{语句}
+ * @author Administrator
+ * 
+ */
+/*
+ * 定义一个类：
+ * public: java中的关键字，用来修饰这个类是公共的，访问权限
+ * class: java的关键字，用来定义一个类的
+ * HelloWorld: 类名----驼峰命名法
+ * {代码}
+ */
+public class HelloWorld {
+	/*
+	 * 定义一个主方法：
+	 * 主函数/方法 ---main方法就是程序的入口
+	 * public：java的关键字，用来修饰方法的访问权限，公共的
+	 * static: java的关键字，用来修饰方法是静态的
+	 * void: java的关键字，用来修饰方法是没有返回值的
+	 * main：方法的名称
+	 * (): 就是方法的标志
+	 * String[] args: 方法的参数列表
+	 * {代码...}:方法体
+	 * 写法：输入main，按按键：alt+/
+	 */
+	public static void main(String[] args) {
+		//syso alt+/  
+		/*
+		 * 控制台输出指定的数据：
+		 * System：发出一个系统的指令
+		 * out: 向外输出
+		 * println:打印之后进行换行操作
+		 * print:打印之后不用进行换行
+		 * ():方法的标记
+		 * 12345----方法的参数
+		 * ;  java的语句结束标志
+		 * .  调用
+		 */
+		System.out.print(12345);
+		System.out.println();//换行
+		System.out.println(12345);
+	}
+
+}
+
+
+四、数据类型
+
+-------------------------------------------
+标识符：
+	数字、字母、下划线、$
+	不能以数字开头
+	不能是java关键字
+	见名知意
+关键字：查看图---不要死记
+
+变量：不固定的值
+有效的标识符：  
+int 2b;错误
+int b2;正确的
+不能是java关键字
+变量名不能重复
+int a;
+int a;
+
+常量：固定的值
+-------------------------------------------------------------
+
+ -- 1、基本数据类型：
+     8种：byte/short/int/long  float/double  char  boolean
+--  2、取值范围：
+     demo
+
+package cn.tedu.demo;
+/**
+ * 取值范围：测试一下
+ * @author Administrator
+ *
+ */
+public class DataTypeDemo {
+	
+	public static void main(String[] args) {
+		//1、整型：byte  short  int  long
+		//如何声明一个变量??  变量的数据类型  变量名 = 变量的值;
+		//定义一个byte类型的变量 最小值用min  最大值用max
+		byte min = -128;
+		byte max = 127;
+		System.out.println(min);
+		System.out.println(max);
+		byte min1 = Byte.MIN_VALUE;
+		byte max1 = Byte.MAX_VALUE;
+		System.out.println(min1);//-128
+		System.out.println(max1);//127
+		//short
+		short min2 = Short.MIN_VALUE;//使用工具类
+		short max2 = Short.MAX_VALUE;//使用工具类
+		System.out.println(min2);//-32768
+		System.out.println(max2);//32767
+		
+		//int ---> 包装类 Integer
+		int min3 = Integer.MIN_VALUE;
+		int max3 = Integer.MAX_VALUE;
+		System.out.println(min3);//-2147483648
+		System.out.println(max3);//2147483647
+		
+		//long ---> Long
+		long min4 = Long.MIN_VALUE;
+		long max4 = Long.MAX_VALUE;
+		System.out.println(min4);//-9223372036854775808
+		System.out.println(max4);//9223372036854775807
+		
+		//浮点型
+		float min5 = Float.MIN_VALUE;
+		float max5 = Float.MAX_VALUE;
+		System.out.println(min5);//1.4E-45
+		System.out.println(max5);//3.4028235E38
+		
+		double min6 = Double.MIN_VALUE;
+		double max6 = Double.MAX_VALUE;
+		System.out.println(min6);//4.9E-324
+		System.out.println(max6);//1.7976931348623157E308
+		
+		//boolean  默认值false
+		boolean flag  = false;
+		boolean flag2  = true;
+		System.out.println(flag);
+		System.out.println(flag2);
+		
+		//char类型  单引号引起来的
+		char c = '燕';
+		System.out.println(c);
+		char c2 = 'a';
+		System.out.println(c2);//a
+		char c3 = '?';
+		char c4 = 65535;
+		System.out.println(c3);
+		System.out.println(c4);
+		char c5 = 97;
+		System.out.println(c5);//a
+	}
+}
+---------------------------------------------------------------------
+扩展：
+基本数据类型：
+年龄一般使用？ 0-100   最佳的是byte   -128---127   
+byte 1 个字节   8位
+int    4个字节    32位
+性别：男,女
+定义？boolean  gender = false;---占一个字节，8位
+false代表女，true代表男
+实际开发中，尽量用字节空间少的！！！
+--------------------------------------------------------------------
+package cn.tedu.demo;
+
+import java.util.Scanner;
+
+/**
+ * 求圆的面积和周长:
+ * double r
+ * 面积：3.14*r*r;
+ * 周长：2*3.14*r;
+ * @author Administrator
+ */
+public class AreaDemo {
+	public static void main(String[] args) {
+//		long x = 123456789011l;
+//		System.out.println(x);
+		//半径
+		//double r = 5;//固定
+		System.out.println("请输入圆的半径：");
+		//键盘接收数据
+		Scanner sc = new Scanner(System.in);
+		double r = sc.nextDouble();
+		System.out.println("你输入圆的半径为：" + r);
+		System.out.println("开始计算圆的面积与周长...");
+		//计算圆的面积和周长 
+		double s = 3.14 * r * r;
+		double l = 3.14 * 2 * r;
+//		double s = Math.PI * r * r;
+//		double l = Math.PI * 2 * r;
+		System.out.println("得到圆的面积：" + s);
+		System.out.println("得到圆的周长：" + l);
+		sc.close();
+	}
+}
+--------------------------------------------------------------------
+订单：恶意刷单，7天后自动删除。----毫秒为单位
+int week = 7*24*60*60*1000;
+
+------------------------------------------------------------------------
+package cn.tedu.demo;
+/**
+ * 数据类型的转换：
+ * 小转大
+ * 大转小
+ * @author Administrator
+ *
+ */
+public class Test05 {
+
+	public static void main(String[] args) {
+		//总结：计算结果的类型，是与最大类型一致的。
+		System.out.println(1+1);//int + int => int----2
+		System.out.println(1 + "2");//12  拼接字符串 
+		System.out.println(1 + '0');//int + char =>int  49
+		System.out.println(1 + 1.0);//int + double =>double 2.0		
+		System.out.println(5/3);//int/int => int  1
+		System.out.println(5.0/3);//double/int =>double  1.66666666667
+		System.out.println(5d/3);//double/int =>double 1.66666666667
+		
+		//2、总结：byte,short,char三种比int小的整数，运算的时候，先自动转化为int类型
+		byte b1 = 1;
+		byte b2 = 2;
+		//byte c = b1 + b2;
+		//大转小----需要强制转化
+		byte c = (byte) (b1 + b2);
+		System.out.println(c);
+		System.out.println("-----------------------------");
+		
+		//3、在整数运算过程中，可能会超出范围，可以编译运行，最终的数据不准确了。
+		int x = 1000*365*24*60*60*1000;//int*int*int*int*int*int==>int
+		System.out.println(x);
+		//修改：在运算的结果加上L---L就是long类型的  int类型转为long类型
+		System.out.println(1000*365*24*60*60*1000L);
+		long x1 = 1000*365*24*60*60*1000l;//加上L
+		System.out.println(x1);
+		
+		//4、了解：浮点型数据参与运算，结果不精确
+		System.out.println(1-0.8);
+		
+		//5、了解 Infinity---无穷大   
+		System.out.println(3.14/0);
+		/*
+		 * NaN（Not a Number，非数）是计算机科学中数值数据类型的一类值，
+		 * 表示未定义或不可表示的值。常在浮点数运算中使用。
+		 * 首次引入NaN的是1985年的IEEE 754浮点数标准。
+		 */
+		System.out.println(0/0.0);
+		
+	}
+	
+	
+}
+---------------------------------------------------------------------------------------------
+了解一下：
+包装类型：
+
+int.value();
+String
+
+
+
 
 
 
