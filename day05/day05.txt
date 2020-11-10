@@ -1,0 +1,438 @@
+day05
+-------------------------------------
+1、成员变量和局部变量
+	怎么定义？怎么使用？使用范围？
+2、方法
+	基本概念
+	基本语法
+	方法的使用
+3、数组
+	基本概念
+	语法
+	声明和初始化
+		动态初始化
+		静态初始化
+	应用
+		数组的下标：默认从0开始
+		数组的长度：arr.length
+		数组的遍历：for循环遍历、增强性for循环
+		Demo01:
+		
+		package cn.tedu.demo;
+/**
+ * 补充：
+ * 增强性for循环：
+ * @author Administrator
+ */
+public class Demo01 {
+	public static void main(String[] args) {
+		//数组的初始化---静态初始化
+		int[] arr = {1,2,3,4};
+		/*
+		 * arr:遍历的数组
+		 * int i：数组声明时候的数据类型,
+		 * 数组每一个元素中的数据类型去做接收
+		 */
+		for (int i : arr) {
+			System.out.println(i);
+		}
+		
+		for (int i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+----------------------------------------------
+1、数组的工具类：Arrays
+	-- copyOf
+	-- sort
+	-- toString
+	
+	Demo02:
+	
+	package cn.tedu.demo;
+
+import java.util.Arrays;
+
+/**
+ * Arrays:工具类
+ * 		toString():把数组红的数据变成串展示[1,2,3,4]
+ * 		sort():无序的数组进行排序。
+ * @author Administrator
+ */
+public class Demo02 {
+	public static void main(String[] args) {
+		//定义一个数组
+		int[] arr = {13,2,1,3,6,8,23};
+		//方法：toString()打印
+		print(arr);//方法的调用
+		sortArr(arr);//数组的排序
+		copyArr(arr);//对数组进行复制
+	}
+	//数组的复制：copyOf(1,2)  1：放的是要复制的数组，2:新的长度
+	public static void copyArr(int[] arr) {
+		int[] arr1 = Arrays.copyOf(arr, arr.length);
+		System.out.println(Arrays.toString(arr1));
+		System.out.println("---------------------------------");
+		//1、原数组arr中增加两个元素-----数组的扩容
+		arr1 = Arrays.copyOf(arr1, arr1.length + 2);
+		System.out.println(Arrays.toString(arr1));
+		//2、在原数组arr中减少4个元素------数组的缩容
+		arr1 = Arrays.copyOf(arr1, arr1.length - 4);
+		System.out.println(Arrays.toString(arr1));
+	}
+	//数组的排序
+	public static void sortArr(int[] arr) {
+		//对数组进行排序操作
+		Arrays.sort(arr);
+		//输出的字符串形式
+		//[1, 2, 3, 6, 8, 13, 23]-----默认是从小到大的
+		System.out.println(Arrays.toString(arr));
+	}
+
+	//方法的定义：确定返回值类型  确定参数列表
+	public static void print(int[] arr) {
+		//		for (int i = 0; i < arr.length; i++) {
+		//			System.out.println(arr[i]);
+		//		}
+		//使用工具类
+		//toString(arr);//将指定的数组arr里面的数据变成字符串进行展示的。
+		String str = Arrays.toString(arr);
+		//[1, 3, 6, 8, 23]
+		System.out.println(str);
+		//[1, 3, 6, 8, 23]
+		System.out.println(Arrays.toString(arr));
+	}
+}
+	------------------------------------------------------------
+2、数组的冒泡排序
+	
+	利用方法单独封装出来
+	
+	升序：
+	原理：相邻的元素
+	
+	Demo03
+	
+package cn.tedu.demo;
+
+import java.util.Arrays;
+
+/**
+ * 冒泡排序：
+ * 算法：掌握
+ * @author Administrator
+ */
+public class Demo03 {
+	public static void main(String[] args) {
+		int[] arr = {3,5,6,7,32,8,9};
+		arr = bubbleSorted(arr);
+		System.out.println(Arrays.toString(arr));
+	}
+	//定义一个方法：参数：int[]数组   返回值是：int[]
+	public static int[] bubbleSorted(int[] arr) {
+		//优化：
+		boolean flag;//true：代表排好序   false:没有排好序
+		for (int i = 0; i < arr.length - 1; i++) {//数组中有n个元素，比较n-1趟。
+			flag = true;//假设剩下的元素已经排好序了
+			//每一趟次数
+			for (int j = 0; j < arr.length - 1 - i; j++) {
+				//相邻元素的比较
+				//如果前面的元素大于后面的元素，进行交换
+				if (arr[j] > arr[j + 1]) {
+					int temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+					//如果元素发生了交换，说明剩下的元素是没有排好序的
+					flag = false;
+					/*
+					 * int x = 3 ; int y = 2 
+					 * int temp = x;
+					 * x = y;
+					 * y = temp;
+					 */
+				}
+			}
+			System.out.println("i：" + i);
+			if (flag) {
+				break;//跳出循环
+			}
+		}
+		return arr;
+	}
+}
+
+-------------------------------------------
+扩展补充：
+方法中：形式参数的改变会不会影响实际参数的改变？
+
+Demo04:
+
+package cn.tedu.demo;
+
+import java.util.Arrays;
+
+/**
+ * 引用数据类型作为参数 ：
+ * 形式参数的改变会不会影响实际参数的改变？？会改变
+ * @author Administrator
+ */
+public class Demo04 {
+
+	public static void main(String[] args) {
+		
+		int[] arr = {1,3,6,9,10};
+		System.out.println(Arrays.toString(arr));
+		changeArr(arr);
+		System.out.println(Arrays.toString(arr));
+//		for (int i = 0; i < arr.length; i++) {
+//			System.out.println(arr[i]);
+//		}
+	}
+	//形式参数：changeArr(int[] arr)----int[] arr 
+	public static void changeArr(int[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i] % 2 == 0) {//6,10
+				arr[i] *= 2;//12,20
+			}
+		}
+		//1,3,12,9,20
+		System.out.println(Arrays.toString(arr));
+	}
+}
+
+-------------------------------------------------
+Demo05:基本数据类型作为方法的形式参数，形式参数的改变不会影响实际参数的改变
+
+package cn.tedu.demo;
+/**
+ * 基本数据类型作为方法的形式参数，形式参数的改变不会影响实际参数的改变。
+ * @author Administrator
+ */
+public class Demo05 {
+	public static void main(String[] args) {
+		int x = 5;
+		int y = 6;
+		System.out.println("x = " + x + ", y = " + y);//5,6
+		change(x,y);
+		System.out.println("----------------------");
+		System.out.println("x = " + x + ", y = " + y);//5,6
+	}
+	private static void change(int x, int y) {
+		System.out.println("x = " + x + ", y = " + y);//5,6
+		y = x;//5
+		y = x + y;//10
+		System.out.println("x = " + x + ", y = " + y);//5,10
+	}
+}
+---------------------------------------------------
+3、二维数组------【了解】
+	概念：
+	其实就是元素为一维数组的数组。
+	基本格式：
+		数据类型[][] 数组名;//推荐使用
+		数据类型  数组名[][];
+		数据类型[] 数组名[];
+	初始化：
+		动态初始化：
+			数据类型[][] 数组名 = new 数据类型[m][n];
+			m:代表的就是二维数组中的一维数组的个数
+			n：代表的就是一维数组中元素的个数
+			
+			Demo06
+			
+		静态初始化：
+			//数据类型[] 数组名 = new 数据类型[]{};
+			数据类型[][] 数组名 = new 数据类型[][]{{元素,元素...},{元素,元素...},...}; 	
+			简化格式：
+			数据类型[][] 数组名 = {{元素,元素...},{元素,元素...},...};	
+			
+			Demo06		
+			
+			
+	package cn.tedu.demo;
+
+/**
+ * 二维数组：
+ * 	动态初始化：
+ * 	静态初始化：
+ * 
+ * @author Administrator
+ *
+ */
+public class Demo06 {
+
+	public static void main(String[] args) {
+		int[][] arr = new int[2][3];
+		System.out.println(arr[0][0]);
+		System.out.println(arr[0][1]);
+		System.out.println(arr[0][2]);
+		//System.out.println(arr[0][3]);
+		System.out.println(arr[1][0]);
+		System.out.println(arr[1][1]);
+		System.out.println(arr[1][2]);
+		//System.out.println(arr[2][0]);
+		int[][] arr1 = {{1,2,3},{4,5,6}};
+		System.out.println(arr1);
+		System.out.println(arr1[0]);//数组 
+		System.out.println(arr1[1]);
+		//System.out.println(arr1[2]);
+	}
+}
+	二维数组的遍历：
+		使用for循环:
+		
+			Demo07
+	
+	package cn.tedu.demo;
+/**
+ * 二维数组的遍历：
+ * 
+ * @author Administrator
+ *
+ */
+public class Demo07 {
+	
+	public static void main(String[] args) {
+		
+		int[][] arr = {{1,2,3},{4,5,6},{7,8,9}};
+		
+		System.out.println(arr[0]);//1
+		//第一个一维数组
+		for (int i = 0; i < arr.length; i++) {
+			System.out.println(arr[0][i]);
+		}
+		
+		//获取第二个
+		//获取第三个
+	}
+}
+---------------------------------------------------
+4、OOP:
+面向过程：-----执行者
+	强调的是过程，所有事情都是需要自己完成的。
+面向对象：-----指挥者
+	是一种更符合我们习惯的一种思想，自己的事情交给别人去做。
+
+--------------------------------------------------
+类和对象：
+	类：
+	类是抽象的，一组相关的属性和行为组成的集合。
+		属性：姓名,年龄，身高，体重...
+		行为：打游戏，吃饭，逛街...
+	对象：是该类事物的具体体现
+		对象是具体的，可以用来描述类里面的信息。
+	
+	类中成员变量和方法
+	
+	车：类
+	对象：宝马、奔驰、大众、奥迪、雅迪等
+	
+	万物皆对象。
+	
+类和对象的创建：
+	类通过关键字class创建的
+	对象是通过关键字new创建出来的
+	
+	创建一个车类
+	
+Demo08
+
+package cn.tedu.oop;
+/**
+ * 测试类：Car
+ * 多个类，放到一起，只有一个公共public修饰、
+ * 		这个public修饰的类名就是.java的类名。
+ * @author Administrator
+ *
+ */
+public class Demo08 {
+	public static void main(String[] args) {
+		new Cars().go();//匿名对象
+		Cars c = new Cars();//有名字的对象，叫c
+		//调用成员变量和方法
+		c.color = "黑色";
+		c.brand = "奔驰";
+		c.price = 400000.0;
+		System.out.println(c.color);
+		System.out.println(c.brand);
+		System.out.println(c.price);
+		c.go();
+		c.back();
+		System.out.println("---------------------");
+		Car c1 = new Car();//有名字的对象，叫c
+		//调用成员变量和方法
+		c1.color = "黑色";
+		c1.brand = "大众";
+		c1.price = 200000.0;
+		System.out.println(c1.color);
+		System.out.println(c1.brand);
+		System.out.println(c1.price);
+		c1.go();
+		c1.back();
+	}
+}
+class Cars {
+	//成员变量：声明在类内部，方法的外部
+	String color;//颜色
+	String brand;//品牌
+	double price;//价格
+	//方法：定义方法
+	public void go() {
+		System.out.println("go go go...");
+	}
+	public void back() {
+		System.out.println("后退哦......");
+	}
+}
+
+----------------------------------------------------
+	练习：
+	创建一个手机类：
+	属性：颜色、品牌、价格、是不是支持5G、大小
+	行为：可以给XXX打电话
+		   可以给XXX发短信
+		   可以打游戏
+         练习：
+         学生类：
+         属性：姓名,年龄，身高，体重，性别
+         行为：学习，吃饭，打游戏
+-----------------------------------------------------
+熟悉：IDEA的基本操作和使用
+写HelloWorld.java
+
+
+	
+	
+			
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
