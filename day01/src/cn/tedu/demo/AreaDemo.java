@@ -1,5 +1,6 @@
 package cn.tedu.demo;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -22,8 +23,11 @@ public class AreaDemo {
 		System.out.println("你输入圆的半径为：" + r);
 		System.out.println("开始计算圆的面积与周长...");
 		//计算圆的面积和周长 
-		double s = 3.14 * r * r;
-		double l = 3.14 * 2 * r;
+		BigDecimal pr = new BigDecimal(Double.toString(r));
+		BigDecimal pr1 = new BigDecimal(Double.toString(3.14));
+		
+		double s = pr1.doubleValue() * pr.multiply(pr).doubleValue();
+		double l = 2 * pr.multiply(pr1).doubleValue();
 //		double s = Math.PI * r * r;
 //		double l = Math.PI * 2 * r;
 		System.out.println("得到圆的面积：" + s);

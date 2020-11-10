@@ -1,5 +1,7 @@
 package cn.tedu.demo;
 
+import java.math.BigDecimal;
+
 public class Test04 {
 
 	public static void main(String[] args) {
@@ -14,6 +16,14 @@ public class Test04 {
 		float f = 3.125f;
 		double d = 3.2345d;
 		
+		double money = 3.0;
+		double price = 2.9;
+		System.out.println(money - price); 
+		
+		BigDecimal p1 = new BigDecimal(Double.toString(money));
+		BigDecimal p2 = new BigDecimal(Double.toString(price));
+		double p3 = p1.subtract(p2).doubleValue();
+		System.out.println(p3);
 		
 	}
 	
